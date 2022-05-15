@@ -1,0 +1,9 @@
+.home-bg-container {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}

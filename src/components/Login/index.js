@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import Cookies from 'js-cookie'
 import './index.css'
 
 class Login extends Component {
@@ -20,8 +21,15 @@ class Login extends Component {
     }
 
     const response = await fetch(url, options)
-    if (response.ok === true) {
-      console.log(response)
+    const loginResponse = await response.json()
+    if (response.ok) {
+      const jwtToken = loginResponse.jwt_token
+      Cookies.set('jwt_token', jwtToken, {expires: 30})
+      const {history} = this.props
+      history.replace('/')
+    } else {
+      const errorMsg = loginResponse.error_msg
+      this.setState({errorMsg})
     }
   }
 
